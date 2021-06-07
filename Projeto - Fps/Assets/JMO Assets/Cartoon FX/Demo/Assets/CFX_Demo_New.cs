@@ -1,8 +1,10 @@
 using UnityEngine;
-using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
+using UnityEngine.UIElements;
 using System.Text.RegularExpressions;
+using Image = UnityEngine.UI.Image;
 
 // Cartoon FX - (c) 2015 - Jean Moreno
 //

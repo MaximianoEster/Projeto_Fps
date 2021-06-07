@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set;}
 
     [SerializeField] private InputManager _inputManager = default;
-    [SerializeField] private VfxObjectPool _vfxObjectPool = default;
+    [SerializeField] private VfxManager vfxManager = default;
 
     private void Awake()
     {
@@ -33,5 +33,5 @@ public class GameManager : MonoBehaviour
 
     public InputManager InputManager => _inputManager;
 
-    public VfxObjectPool VfxObjectPool => _vfxObjectPool;
+    public VfxManager VfxManager => vfxManager;
 }

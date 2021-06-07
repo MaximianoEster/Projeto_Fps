@@ -20,7 +20,6 @@ public class Cannonball : MonoBehaviour
     
     private void OnCollisionEnter(Collision collision)
     {
-        gameObject.SetActive(false);
         OnColliderAnotherObject?.Invoke(this);
     }
 }
