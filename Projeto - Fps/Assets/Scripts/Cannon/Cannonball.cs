@@ -16,10 +16,16 @@ public class Cannonball : MonoBehaviour
     public void OnFire(Vector3 speed)
     {
         _rigidbody.AddForce(speed, ForceMode.VelocityChange);
+        _isHit = false;
     }
     
     private void OnCollisionEnter(Collision collision)
     {
+        if (_isHit)
+        {
+            return;
+        }
         OnColliderAnotherObject?.Invoke(this);
+        _isHit = true;
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Cannon : MonoBehaviour
 {
-    [SerializeField] private CannonballPool _cannonballPool = default;
+    [SerializeField] private CannonballObjectPool cannonballObjectPool = default;
     [SerializeField] private Transform _spawnPoint = default;
     
     [SerializeField] private InteractiveItem _barrelInteractive = default;
@@ -14,8 +14,6 @@ public class Cannon : MonoBehaviour
     [SerializeField] private CameraShake _cameraShake = default;
     
     private float _firePower = default;
-    
-    
     private Camera cam = default;
     
     private void Awake()
@@ -35,7 +33,7 @@ public class Cannon : MonoBehaviour
 
     private void InitializeSettings()
     {
-        _cannonballPool.InitializeCannonballPool();
+        cannonballObjectPool.InitializeCannonballPool();
         _firePower = 200;
     }
     
@@ -49,13 +47,13 @@ public class Cannon : MonoBehaviour
             
             if (inputsData.IsAttacking)
             {
-                Cannonball currentCannonball = _cannonballPool.GetCannonballFromPool();
+                Cannonball currentCannonball = cannonballObjectPool.GetCannonballFromPool();
                 if (currentCannonball != null)
                 {
                     _cameraShake.ShakeCamera();
                     
                     currentCannonball.OnColliderAnotherObject += _explosionController.CreateExplosion;
-                    currentCannonball.OnColliderAnotherObject += _cannonballPool.DisableCannonball;
+                    currentCannonball.OnColliderAnotherObject += cannonballObjectPool.DisableCannonball;
                     
                     currentCannonball.gameObject.transform.position = 
                         _spawnPoint.transform.position;

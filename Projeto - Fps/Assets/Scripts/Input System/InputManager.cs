@@ -18,6 +18,7 @@ public class InputManager : MonoBehaviour
 
     private bool _isAttacking = false;
     private bool _isJumping = false;
+    private bool _isAiming = false;
 
     private InteractionType _interactionType = InteractionType.NONE;
 
@@ -54,6 +55,7 @@ public class InputManager : MonoBehaviour
         _playerControls.Player.Jump.performed += GetJumpInput;
         _playerControls.Player.Interaction.performed += GetInteractionInput;
         _playerControls.Player.Attacking.performed += GetAttackInput;
+        _playerControls.Player.Aim.performed += GetAimInput;
     }
     
     private void GetKeyboardInput(InputAction.CallbackContext ctx)
@@ -85,6 +87,14 @@ public class InputManager : MonoBehaviour
         }
     }
 
+    private void GetAimInput(InputAction.CallbackContext ctx)
+    {
+        if (ctx.performed)
+        {
+            _isAiming = true;
+        }
+    }
+
     private void GetInteractionInput(InputAction.CallbackContext ctx)
     {
         if (ctx.interaction is PressInteraction)
@@ -100,7 +110,7 @@ public class InputManager : MonoBehaviour
     private InputsData CreateStruct()
     {
         return _currentInputsData = new InputsData(_keyboardDirection, _mouseDirection,
-            _isAttacking, _isJumping, _interactionType);
+            _isAttacking, _isJumping, _isAiming, _interactionType);
     }
 
     private void ResetStruct()

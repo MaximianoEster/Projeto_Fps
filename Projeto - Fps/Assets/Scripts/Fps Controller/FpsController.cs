@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions.Must;
 using UnityEngine.InputSystem;
 
 public class FpsController : MonoBehaviour
@@ -9,7 +10,8 @@ public class FpsController : MonoBehaviour
     [SerializeField] private CharacterController _characterController = default;
     [SerializeField] private FpsData _fpsData = default;
     [SerializeField] private InteractionHandler _interactionHandler = default;
-    [SerializeField] private RotationData rotationData = default;
+    [SerializeField] private RotationData _rotationData = default;
+    [SerializeField] private WeaponManager _weaponManager = default;
     
     private float _regularSpeed = default;
     private float _moveBackardsSpeed = default;
@@ -24,12 +26,15 @@ public class FpsController : MonoBehaviour
 
     private float _minHorizontalAngleRotation = default;
     private float _maxHorizontalAngleRotation = default;
+    
+    private float _minVerticalAngleRotation = default;
+    private float _maxVerticalAngleRotation = default;
     private float _rotationSpeed = default;
-
+    private float _verticalRotationSpeed = default;
+    
     // Maybe remove latter
     private float _currentSpeed = default;
 
-    private Vector2 _turn = default;
     private void Awake()
     {
         InitializeSettings();
@@ -58,9 +63,14 @@ public class FpsController : MonoBehaviour
         _jumpHeight = _fpsData.JumpHeight;
         _gravity = _fpsData.Gravity;
         
-        _rotationSpeed = rotationData.HorizontalSpeed;
-        _minHorizontalAngleRotation = rotationData.HorizontalAngleMin;
-        _maxHorizontalAngleRotation = rotationData.HorizontalAngleMax;
+        _rotationSpeed = _rotationData.HorizontalSpeed;
+        _verticalRotationSpeed = _rotationData.VerticalSpeed;
+        
+        _minHorizontalAngleRotation = _rotationData.HorizontalAngleMin;
+        _maxHorizontalAngleRotation = _rotationData.HorizontalAngleMax;
+        
+        _minVerticalAngleRotation = _rotationData.VerticalAngleMin;
+        _maxVerticalAngleRotation = _rotationData.VerticalAngleMax;
     }
 
     private void Movement(InputsData inputsData)
@@ -99,11 +109,18 @@ public class FpsController : MonoBehaviour
             if (mouseDirection != Vector2.zero)
             {
                 _startingRotation.x += mouseDirection.x * _rotationSpeed * Time.deltaTime;
+                _startingRotation.y += mouseDirection.y * _verticalRotationSpeed * Time.deltaTime;
                 
                 _startingRotation.x = Mathf.Clamp(_startingRotation.x,
                     -_minHorizontalAngleRotation, _maxHorizontalAngleRotation);
                 
+                _startingRotation.y = Mathf.Clamp(_startingRotation.y,
+                    -_minVerticalAngleRotation, _maxVerticalAngleRotation);
+                
+                
                 transform.localRotation = Quaternion.Euler(0, _startingRotation.x, 0);
+                _weaponManager.transform.localRotation = Quaternion.Euler(-_startingRotation.y, 0, 0);
+                
             }
         }
     }

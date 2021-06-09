@@ -10,6 +10,9 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private List<Transform> _spawnPointsList = default;
     [SerializeField] private Transform _destination = default;
 
+    private Transform _currentSpawnPoint = default;
+    private Vfx _currentVfx = default;
+    
     private void Awake()
     {
         InitializeSettings();
@@ -25,11 +28,21 @@ public class SpawnManager : MonoBehaviour
         EnemyController currentEnemy = _enemiesObjectPool.GetRandomEnemyFromPool();
         if (currentEnemy != null)
         {
+            _currentSpawnPoint = GetRandomSpawnPoint();
+            
+            EnableSpawnVfx();
             currentEnemy.transform.SetParent(null);
-            currentEnemy.transform.position = GetRandomSpawnPoint().position;
+            currentEnemy.transform.position = _currentSpawnPoint.position;
             currentEnemy.gameObject.SetActive(true);
             currentEnemy.SetDestination(_destination);
         }
+    }
+
+    private void EnableSpawnVfx()
+    {
+        _currentVfx = GameManager.Instance.VfxManager.GetVfxFromPool(VfxType.SKELETON_SPAWN);
+        _currentVfx.transform.position = _currentSpawnPoint.position;
+        _currentVfx.gameObject.SetActive(true);
     }
 
     private Transform GetRandomSpawnPoint()

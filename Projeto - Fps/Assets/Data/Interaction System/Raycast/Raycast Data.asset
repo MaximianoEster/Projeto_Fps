@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd3ad11c0a280a445b115f849d51af01, type: 3}
   m_Name: Raycast Data
   m_EditorClassIdentifier: 
-  RayDistance: 5
-  RayRadius: 5
+  RayDistance: 3
+  RayRadius: 1.5
   InteractableLayerMask:
     serializedVersion: 2
     m_Bits: 4096

@@ -12,8 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d863a62a2af95d041bdb7f00ed7d2efe, type: 3}
   m_Name: Bow Data
   m_EditorClassIdentifier: 
-  TimeToRelaod: 1
-  FirePower: 20
-  ArrowAmount: 20
-  ArrowPrefab: {fileID: 1152136202662404872, guid: 43ea8c1bae36a334eae2a1f1800f1e1f,
-    type: 3}
+  TimeToReload: 0.5
+  ArrowLaunchForce: 2000
