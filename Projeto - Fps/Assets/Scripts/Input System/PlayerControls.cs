@@ -65,6 +65,14 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""WheelWeapon"",
+                    ""type"": ""Button"",
+                    ""id"": ""4b3e28e0-9b91-4bca-b31f-63b26c0f00fb"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press""
                 }
             ],
             ""bindings"": [
@@ -177,6 +185,17 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""action"": ""Aim"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2612478f-95ed-457b-b359-4e769e2707af"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""WheelWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -191,6 +210,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         m_Player_Attacking = m_Player.FindAction("Attacking", throwIfNotFound: true);
         m_Player_Aim = m_Player.FindAction("Aim", throwIfNotFound: true);
+        m_Player_WheelWeapon = m_Player.FindAction("WheelWeapon", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -246,6 +266,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Look;
     private readonly InputAction m_Player_Attacking;
     private readonly InputAction m_Player_Aim;
+    private readonly InputAction m_Player_WheelWeapon;
     public struct PlayerActions
     {
         private @PlayerControls m_Wrapper;
@@ -256,6 +277,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputAction @Attacking => m_Wrapper.m_Player_Attacking;
         public InputAction @Aim => m_Wrapper.m_Player_Aim;
+        public InputAction @WheelWeapon => m_Wrapper.m_Player_WheelWeapon;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -283,6 +305,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Aim.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAim;
                 @Aim.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAim;
                 @Aim.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAim;
+                @WheelWeapon.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnWheelWeapon;
+                @WheelWeapon.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnWheelWeapon;
+                @WheelWeapon.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnWheelWeapon;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -305,6 +330,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Aim.started += instance.OnAim;
                 @Aim.performed += instance.OnAim;
                 @Aim.canceled += instance.OnAim;
+                @WheelWeapon.started += instance.OnWheelWeapon;
+                @WheelWeapon.performed += instance.OnWheelWeapon;
+                @WheelWeapon.canceled += instance.OnWheelWeapon;
             }
         }
     }
@@ -317,5 +345,6 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         void OnLook(InputAction.CallbackContext context);
         void OnAttacking(InputAction.CallbackContext context);
         void OnAim(InputAction.CallbackContext context);
+        void OnWheelWeapon(InputAction.CallbackContext context);
     }
 }

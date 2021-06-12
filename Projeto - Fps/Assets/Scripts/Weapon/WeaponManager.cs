@@ -5,22 +5,62 @@ using UnityEngine;
 public class WeaponManager : MonoBehaviour
 {
     [SerializeField] private List<Weapon> _weaponsList = default;
-    private int _weaponIndex = 0;
+    [SerializeField] private Transform _weaponGroup = default;
 
-    private void Start()
+    private Dictionary<WeaponType, Weapon> _weaponDicitionary = 
+        new Dictionary<WeaponType, Weapon>();
+
+    private void Awake()
     {
-        
+        InitializeDictionary();
     }
 
-    public void DisableWeapons(bool enable)
+    private void InitializeDictionary()
     {
         for (int i = 0; i < _weaponsList.Count; i++)
         {
-            _weaponsList[i].gameObject.SetActive(enable);
+            Weapon instance = Instantiate(_weaponsList[i]);
+            instance.transform.SetParent(_weaponGroup);
+            instance.gameObject.SetActive(false);
+            AddWeaponToDictionary(instance);
         }
     }
 
-    public void ChangeWeapon()
+    private void EnableWeapon(WeaponType type)
+    {
+        for (int i = 0; i < _weaponDicitionary.Count; i++)
+        {
+            _weaponDicitionary[(WeaponType) i].gameObject.SetActive(false);
+        }
+        
+        _weaponDicitionary[type].gameObject.SetActive(true);
+    }
+
+    private void AddWeaponToDictionary(Weapon weaponData)
+    {
+        if (!_weaponDicitionary.ContainsKey(weaponData.Type))
+        {
+           _weaponDicitionary.Add(weaponData.Type, weaponData);
+        }
+        else
+        {
+            return;
+        }
+    }
+    
+    public void ChangeWeapon(WeaponType type)
+    {
+        /*
+        for (int i = 0; i < _weaponDicitionary.Count; i++)
+        {
+            _weaponDicitionary[(WeaponType) i].gameObject.SetActive(false);
+        }
+        */
+        
+        _weaponDicitionary[type].gameObject.SetActive(true);
+    }
+
+    public void EnableWeapon()
     {
         if (_weaponsList != null)
         {
@@ -28,23 +68,8 @@ public class WeaponManager : MonoBehaviour
             {
                 _weaponsList[i].gameObject.SetActive(false);
             }
-            
-            _weaponsList[_weaponIndex].gameObject.SetActive(true);
-        }
-    }
 
-    private void ScrollCheck()
-    {
-        float scrollValue = 0;
-        if (scrollValue > 0)
-        {
-            _weaponIndex++;
-            if (_weaponIndex >= _weaponsList.Count)
-            {
-                _weaponIndex = 0;
-            }
-            
-            ChangeWeapon();
+            //_weaponsList[_weaponIndex].gameObject.SetActive(true);
         }
     }
 }

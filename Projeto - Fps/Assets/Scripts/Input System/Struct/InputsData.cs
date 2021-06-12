@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public struct InputsData
 {
@@ -9,10 +7,11 @@ public struct InputsData
     public bool IsAttacking;
     public bool Isjumping;
     public bool IsAiming;
+    public bool OpenWeaponWheel;
     public InteractionType InteractionType;
     
     public InputsData(Vector2 keyboardDirection, Vector2 mouseDirection, 
-        bool isAttacking, bool isjumping, bool isAiming, InteractionType interactionType)
+        bool isAttacking, bool isjumping, bool isAiming,bool openWeaponWheel, InteractionType interactionType)
     {
         KeyboardDirection = keyboardDirection;
         MouseDirection = mouseDirection;
@@ -20,6 +19,7 @@ public struct InputsData
         IsAttacking = isAttacking;
         Isjumping = isjumping;
         IsAiming = isAiming;
+        OpenWeaponWheel = openWeaponWheel;
 
         InteractionType = interactionType;
     }

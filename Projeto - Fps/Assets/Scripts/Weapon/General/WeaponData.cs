@@ -5,4 +5,7 @@ public class WeaponData : ScriptableObject
 {
     public WeaponType Type;
     public float Damage;
+    public Transform Anchor;
+    public Transform DefaultPosition;
+    public Transform AimPosition;
 }

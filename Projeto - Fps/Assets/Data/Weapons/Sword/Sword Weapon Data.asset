@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a4176cefcda34db4abc401f7ea54f4e2, type: 3}
-  m_Name: Bow  Weapon Data
+  m_Name: Sword Weapon Data
   m_EditorClassIdentifier: 
-  Type: 2
-  Damage: 20
+  Type: 1
+  Damage: 10

@@ -19,6 +19,7 @@ public class InputManager : MonoBehaviour
     private bool _isAttacking = false;
     private bool _isJumping = false;
     private bool _isAiming = false;
+    private bool _openWeaponWheel = false;
 
     private InteractionType _interactionType = InteractionType.NONE;
 
@@ -55,7 +56,12 @@ public class InputManager : MonoBehaviour
         _playerControls.Player.Jump.performed += GetJumpInput;
         _playerControls.Player.Interaction.performed += GetInteractionInput;
         _playerControls.Player.Attacking.performed += GetAttackInput;
-        _playerControls.Player.Aim.performed += GetAimInput;
+        
+        _playerControls.Player.Aim.performed += AimPerformed;
+        _playerControls.Player.Aim.canceled += AimCanceled;
+        
+        _playerControls.Player.WheelWeapon.performed += TabPerformed;
+        _playerControls.Player.WheelWeapon.canceled += TabCanceled;
     }
     
     private void GetKeyboardInput(InputAction.CallbackContext ctx)
@@ -86,15 +92,7 @@ public class InputManager : MonoBehaviour
             _isJumping = true;
         }
     }
-
-    private void GetAimInput(InputAction.CallbackContext ctx)
-    {
-        if (ctx.performed)
-        {
-            _isAiming = true;
-        }
-    }
-
+    
     private void GetInteractionInput(InputAction.CallbackContext ctx)
     {
         if (ctx.interaction is PressInteraction)
@@ -107,10 +105,42 @@ public class InputManager : MonoBehaviour
         }
     }
 
+    private void TabPerformed(InputAction.CallbackContext ctx)
+    {
+        if (ctx.performed)
+        {
+            _openWeaponWheel = true;
+        }
+    }
+
+    private void TabCanceled(InputAction.CallbackContext ctx)
+    {
+        if (ctx.canceled)
+        {
+            _openWeaponWheel = false;
+        }
+    }
+
+    private void AimPerformed(InputAction.CallbackContext ctx)
+    {
+        if (ctx.performed)
+        {
+            _isAiming = true;
+        }
+    }
+
+    private void AimCanceled(InputAction.CallbackContext ctx)
+    {
+        if (ctx.canceled)
+        {
+            _isAiming = false;
+        }
+    }
+
     private InputsData CreateStruct()
     {
         return _currentInputsData = new InputsData(_keyboardDirection, _mouseDirection,
-            _isAttacking, _isJumping, _isAiming, _interactionType);
+            _isAttacking, _isJumping, _isAiming,_openWeaponWheel ,_interactionType);
     }
 
     private void ResetStruct()

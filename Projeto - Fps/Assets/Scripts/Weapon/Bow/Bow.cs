@@ -8,10 +8,12 @@ public class Bow : Weapon
     [Header("Bow Settings")]
     [SerializeField] private BowData _bowData = default;
     
+    /*
     [Space,Header("Positions")]
     [SerializeField] private Transform _anchor = default;
     [SerializeField] private Transform _defaultPosition = default;
     [SerializeField] private Transform _aimPosition = default;
+    */
     
     [Space, Header("Arrows Settings")]
     [SerializeField] private ArrowObjectPool _arrowObjectPool = default;
@@ -42,11 +44,16 @@ public class Bow : Weapon
         GameManager.Instance.InputManager.OnAnyKeyPressed -= FireArrow;
     }
 
+    private void OnEnable()
+    {
+        _anchor.position = _defaultPosition.position;
+    }
+
     public void InitializeBowSettings()
     {
         InitializeWeaponSettings();
         
-        _anchor.position = _defaultPosition.position;
+        
         _timeToReload = _bowData.TimeToReload;
         _arrowLaunchForce = _bowData.ArrowLaunchForce;
         
@@ -76,5 +83,10 @@ public class Bow : Weapon
             
             StartCoroutine(CreateArrow(_currenArrowType));
         }
+    }
+
+    public void EnableBow()
+    {
+        
     }
 }

@@ -136,4 +136,9 @@ public class FpsController : MonoBehaviour
         _velocity.y += _gravity * Time.deltaTime;
         _characterController.Move(_velocity * Time.deltaTime);
     }
+
+    private void ChangeWeapon()
+    {
+        
+    }
 }
