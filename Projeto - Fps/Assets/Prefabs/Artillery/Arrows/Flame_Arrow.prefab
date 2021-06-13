@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 384074866544606800}
   - component: {fileID: 384074866544606807}
   m_Layer: 11
-  m_Name: Arrow_Fire
+  m_Name: Flame_Arrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

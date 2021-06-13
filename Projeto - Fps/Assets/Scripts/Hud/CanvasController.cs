@@ -8,7 +8,9 @@ public class CanvasController : MonoBehaviour
     public Action<WeaponType> UpdateWeapon;
     
     [SerializeField] private WeaponWheelController _weaponWheel = default;
+    
     private WeaponType _currentWeaponSelected = default;
+    private bool _isWeaponWheelOpen = false;
     
     private void Awake()
     {
@@ -17,12 +19,12 @@ public class CanvasController : MonoBehaviour
     
     private void Start()
     {
-        GameManager.Instance.InputManager.OnAnyKeyPressed += OpenWeaponWheel;
+        GameManager.Instance.InputManager.OnTabPerformed += OpenWeaponWheel;
     }
 
     private void OnDisable()
     {
-        GameManager.Instance.InputManager.OnAnyKeyPressed -= OpenWeaponWheel;
+        GameManager.Instance.InputManager.OnTabPerformed += OpenWeaponWheel;
     }
 
     private void InitializeUiElements()
@@ -31,22 +33,22 @@ public class CanvasController : MonoBehaviour
         _weaponWheel.OnWeaponSelected += WeaponSelected;
     }
 
-    private void OpenWeaponWheel(InputsData inputsdata)
+    private void OpenWeaponWheel()
     {
-        if (inputsdata.OpenWeaponWheel)
+        _isWeaponWheelOpen = !_isWeaponWheelOpen;
+        if (_isWeaponWheelOpen)
         {
-            _weaponWheel.gameObject.SetActive(true);
+            _weaponWheel.gameObject.SetActive(_isWeaponWheelOpen);
         }
         else
         {
-            _weaponWheel.gameObject.SetActive(false);
+            _weaponWheel.gameObject.SetActive(_isWeaponWheelOpen);
         }
     }
 
     private void WeaponSelected(WeaponType type)
     {
         _currentWeaponSelected = type;
-        Debug.Log(type);
         UpdateWeapon?.Invoke(_currentWeaponSelected);
     }
 }

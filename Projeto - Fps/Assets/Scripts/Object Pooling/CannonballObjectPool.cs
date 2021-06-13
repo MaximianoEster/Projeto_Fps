@@ -16,7 +16,7 @@ public class CannonballObjectPool : MonoBehaviour
         _cannonballPrefab = cannonballPoolData.CannonballPrefab;
         _cannonballAmount = cannonballPoolData.CannonballAmount;
         
-        CreatePool();
+        CreateCannonballPool();
     }
     
     public Cannonball GetCannonballFromPool()
@@ -38,14 +38,13 @@ public class CannonballObjectPool : MonoBehaviour
         _cannonballList.Add(cannonball);
     }
     
-    private void CreatePool()
+    private void CreateCannonballPool()
     {
         _cannonballList = new List<Cannonball>();
-        Cannonball temp;
         
         for (int i = 0; i < _cannonballAmount; i++)
         {
-            temp = Instantiate(_cannonballPrefab);
+            Cannonball temp = Instantiate(_cannonballPrefab);
             temp.transform.SetParent(_cannonballGroup);
             temp.gameObject.SetActive(false);
             _cannonballList.Add(temp);

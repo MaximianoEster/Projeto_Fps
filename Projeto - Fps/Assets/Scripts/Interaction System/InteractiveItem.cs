@@ -14,7 +14,7 @@ public class InteractiveItem : MonoBehaviour,Iinteractable
         _virtualCamera.gameObject.SetActive(false);
     }
 
-    public void Action(bool setActive)
+    public void OnInteractionPerformed(bool setActive)
     {
         _onCannon = setActive;
         _virtualCamera.gameObject.SetActive(setActive);

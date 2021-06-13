@@ -19,6 +19,6 @@ public class GameController : MonoBehaviour
 
     private void NotifyPlayer(WeaponType type)
     {
-        _fpsWeaponManager.ChangeWeapon(type);
+        _fpsWeaponManager.EquipWeapon(type);
     }
 }

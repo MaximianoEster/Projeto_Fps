@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface Iinteractable
 {
-    void Action(bool activeCamera);
+    void OnInteractionPerformed(bool activeCamera);
 }

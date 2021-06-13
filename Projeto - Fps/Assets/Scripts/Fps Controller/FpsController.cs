@@ -128,17 +128,13 @@ public class FpsController : MonoBehaviour
     private void Jump(InputsData inputsData)
     {
         bool isJumping = inputsData.Isjumping;
-        if (isJumping && _isGrounded)
+        if (_isGrounded && isJumping)
         {
             _velocity.y += Mathf.Sqrt(_jumpHeight * -4.0f * _gravity);
+           
         }
 
         _velocity.y += _gravity * Time.deltaTime;
         _characterController.Move(_velocity * Time.deltaTime);
-    }
-
-    private void ChangeWeapon()
-    {
-        
     }
 }

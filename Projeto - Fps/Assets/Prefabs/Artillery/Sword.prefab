@@ -76,6 +76,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _weaponData: {fileID: 11400000, guid: 74fd61fca5602cb438cd395f47c35d3a, type: 2}
+  _anchor: {fileID: 1100020159203559385}
+  _defaultPosition: {fileID: 1100020159075285450}
+  _aimPosition: {fileID: 1100020159075285450}
 --- !u!1 &1100020158610808394
 GameObject:
   m_ObjectHideFlags: 0

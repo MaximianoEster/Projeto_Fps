@@ -1,19 +1,13 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Packages.Rider.Editor.UnitTesting;
 using UnityEngine;
 
 public class Bow : Weapon
 {
     [Header("Bow Settings")]
     [SerializeField] private BowData _bowData = default;
-    
-    /*
-    [Space,Header("Positions")]
-    [SerializeField] private Transform _anchor = default;
-    [SerializeField] private Transform _defaultPosition = default;
-    [SerializeField] private Transform _aimPosition = default;
-    */
     
     [Space, Header("Arrows Settings")]
     [SerializeField] private ArrowObjectPool _arrowObjectPool = default;
@@ -24,7 +18,6 @@ public class Bow : Weapon
     private float _arrowLaunchForce = default;
     private bool _reloaded = false;
     
-    private ArrowType _currenArrowType = ArrowType.FIRE_ARROW;
     private Arrow _currentArrow = default;
 
 
@@ -35,15 +28,15 @@ public class Bow : Weapon
 
     private void Start()
     {
-        StartCoroutine(CreateArrow(_currenArrowType));
-        GameManager.Instance.InputManager.OnAnyKeyPressed += FireArrow;
+        StartCoroutine(CreateArrow());
+        OnAttackPerformed += FireArrow;
     }
 
     private void OnDisable()
     {
-        GameManager.Instance.InputManager.OnAnyKeyPressed -= FireArrow;
+        OnAttackPerformed -= FireArrow;
     }
-
+    
     private void OnEnable()
     {
         _anchor.position = _defaultPosition.position;
@@ -53,19 +46,18 @@ public class Bow : Weapon
     {
         InitializeWeaponSettings();
         
-        
         _timeToReload = _bowData.TimeToReload;
         _arrowLaunchForce = _bowData.ArrowLaunchForce;
         
         _arrowObjectPool.InitializeArrowPool();
     }
 
-    private IEnumerator CreateArrow(ArrowType arrowType)
+    private IEnumerator CreateArrow()
     {
         _reloaded = false;
         yield return new WaitForSeconds(_timeToReload);
 
-        _currentArrow = _arrowObjectPool.GetArrowFromPool(arrowType);
+        _currentArrow = _arrowObjectPool.GetArrowFromPool();
         _currentArrow.gameObject.transform.SetParent(_socket);
         _currentArrow.gameObject.transform.localPosition = Vector3.zero;
         _currentArrow.gameObject.transform.localRotation = Quaternion.identity;
@@ -74,19 +66,15 @@ public class Bow : Weapon
         _currentArrow.gameObject.SetActive(true);
         _reloaded = true;
     }
-
-    private void FireArrow(InputsData inputsData)
+    
+    private void FireArrow()
     {
-        if (_reloaded && inputsData.IsAttacking)
+        if (_reloaded)
         {
+            _currentArrow.transform.SetParent(null);
             _currentArrow.Fire(_arrowLaunchForce);
             
-            StartCoroutine(CreateArrow(_currenArrowType));
+            StartCoroutine(CreateArrow());
         }
-    }
-
-    public void EnableBow()
-    {
-        
     }
 }

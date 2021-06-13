@@ -62,6 +62,6 @@ public class WeaponWheelButtonController : MonoBehaviour
 
   private WeaponButtonStruct ResetStruct()
   {
-    return new WeaponButtonStruct(String.Empty, String.Empty, null, WeaponType.NONE);
+    return new WeaponButtonStruct(String.Empty, String.Empty, null, 0);
   }
 }

@@ -324,7 +324,7 @@ GameObject:
   - component: {fileID: 69600601769279207}
   - component: {fileID: 69600601769279204}
   m_Layer: 0
-  m_Name: Bow
+  m_Name: Simple_Bow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -359,10 +359,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _weaponData: {fileID: 11400000, guid: 37e64c5a0ba32ac4487ee0e05dc1c02c, type: 2}
-  _bowData: {fileID: 11400000, guid: 77dd1a3985785eb4e95ac4b20c00116d, type: 2}
   _anchor: {fileID: 69600601157915474}
   _defaultPosition: {fileID: 69600601243452653}
   _aimPosition: {fileID: 69600600756839351}
+  _bowData: {fileID: 11400000, guid: 77dd1a3985785eb4e95ac4b20c00116d, type: 2}
   _arrowObjectPool: {fileID: 69600601769279204}
   _socket: {fileID: 69600600764111946}
 --- !u!114 &69600601769279204
@@ -377,7 +377,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccbdc1e5350dded40a83660ba45cc7e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _arrowObjectPoolData: {fileID: 11400000, guid: 95426543908699b4a837b56676181309,
+  _arrowObjectPoolData: {fileID: 11400000, guid: 4da3cbaeeebf2b74197f94ef1b3f96ed,
     type: 2}
   _arrowsGroup: {fileID: 69600600879107388}
 --- !u!1 &69600601828934260

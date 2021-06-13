@@ -6,6 +6,9 @@ using UnityEngine;
 
 public class InteractionHandler : MonoBehaviour
 {
+    public delegate void InteractionStateHandler(bool state);
+    public event InteractionStateHandler NotifyInteractionState;
+    
     [SerializeField] private SphereCastData sphereCastData = default;
     [SerializeField] private CinemachineVirtualCamera _virtualCamera = default;
     
@@ -19,6 +22,7 @@ public class InteractionHandler : MonoBehaviour
     private Iinteractable _interactableItem = default;
     
     private bool _isInteracting = false;
+    private bool _isHolded = false;
     private bool _hit = false;
     private RaycastHit _hitInfo = default;
     
@@ -29,14 +33,19 @@ public class InteractionHandler : MonoBehaviour
     
     private void Start()
     {
-        GameManager.Instance.InputManager.OnAnyKeyPressed += CheckInteractions;
+        GameManager.Instance.InputManager.OnInteractionPerformed += CheckInteractions;
     }
 
     private void OnDisable()
     {
-        GameManager.Instance.InputManager.OnAnyKeyPressed -= CheckInteractions;
+        GameManager.Instance.InputManager.OnInteractionPerformed += CheckInteractions;
     }
-    
+
+    private void Update()
+    {
+        CheckRaycast();
+    }
+
     private void InitializeSettings()
     {
         _mainCamera = Camera.main.transform;
@@ -45,33 +54,35 @@ public class InteractionHandler : MonoBehaviour
         _layerMask = sphereCastData.InteractableLayerMask;
     }
     
-    private void CheckInteractions(InputsData inputsData)
+    private void CheckInteractions()
     {
-        CheckRaycast();
-        _interactionType = inputsData.InteractionType;
+        _isHolded = !_isHolded;
         
-        if (_hit && _interactionType == InteractionType.HOLDED && !_isInteracting)
+        if (_hit && _isHolded && !_isInteracting)
         {
             _hitInfo.transform.gameObject.TryGetComponent
                 (out _interactableItem);
 
             if (_interactableItem != null)
             {
-                EnableCameras(false, true, true);
+                EnableCameras(false, true);
+                _isInteracting = true;
             }
         }
         
-        else if (_isInteracting && _interactionType == InteractionType.PRESSED)
+        else if (_isInteracting && !_isHolded)
         {
-            EnableCameras(true,false,false);
+            EnableCameras(true,false);
+            _isInteracting = false;
         }
+        
+        NotifyInteractionState?.Invoke(_isInteracting);
     }
 
-    private void EnableCameras(bool activeLocalCamera, bool activeItemCamera, bool isInteracting)
+    private void EnableCameras(bool activeLocalCamera, bool activeItemCamera)
     {
         _virtualCamera.gameObject.SetActive(activeLocalCamera);
-        _interactableItem.Action(activeItemCamera);
-        _isInteracting = isInteracting;
+        _interactableItem.OnInteractionPerformed(activeItemCamera);
     }
 
     private void CheckRaycast()
