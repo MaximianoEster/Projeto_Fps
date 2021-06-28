@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25b448b663ab3024a87aa1eaf01f3253, type: 3}
+  m_Name: OP_Flame Arrow Data
+  m_EditorClassIdentifier: 
+  Prefab: {fileID: 1674481269806772250, guid: 02a349282ff7f914c9c02a4095324da7, type: 3}
+  itemType: 2
+  PrefabAmount: 30

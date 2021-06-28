@@ -1,0 +1,19 @@
+﻿public enum ItemType
+{
+    SIMPLE_ARROW = 1, 
+    FLAME_ARROW = 2, 
+    CANNONBALL = 3, 
+    SHOCK_BOMB = 4,
+    VFX_EXPLOSION_CARTOON = 5, 
+    VFX_EXPLOSION_SIMPLE = 6, 
+    VFX_SKELETON_SPAWN = 7, 
+    VFX_KNIGHT_SPAWN = 8, 
+    VFX_WIZARD_SPAWN = 9, 
+    VFX_DARK_DEATH = 10, 
+    VFX_LIGHT_DEATH = 11, 
+    VFX_FIRE = 12, 
+    VFX_ARROW_HIT = 13, 
+    VFX_SWORD_HIT = 14, 
+    VFX_SHOCK_BOMB = 15,
+    VFX_CANNON_MUZZLE_FLASH = 16
+}
