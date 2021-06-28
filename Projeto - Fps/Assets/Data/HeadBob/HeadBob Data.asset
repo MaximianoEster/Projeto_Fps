@@ -123,3 +123,5 @@ MonoBehaviour:
   RegularFrequencyMultiplier: 1.8
   MoveBackwardsFrequencyMultiplier: 0.5
   MoveSideFrequencyMultiplier: 0.75
+  RegularCameraPosition: {x: 0, y: 1.7, z: 0}
+  RegularSpeed: 1.8

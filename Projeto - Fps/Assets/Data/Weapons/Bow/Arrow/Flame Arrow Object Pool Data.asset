@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cffdb1dc59ccb3d47870837c3b8bf173, type: 3}
   m_Name: Flame Arrow Object Pool Data
   m_EditorClassIdentifier: 
-  ArrowPrefab: {fileID: 384074866544606807, guid: 1a339fc5235a8154c8ee68365a492a98,
+  ArrowPrefab: {fileID: 1674481269806772452, guid: 02a349282ff7f914c9c02a4095324da7,
     type: 3}
-  ArrowAmount: 10
+  ArrowAmount: 20

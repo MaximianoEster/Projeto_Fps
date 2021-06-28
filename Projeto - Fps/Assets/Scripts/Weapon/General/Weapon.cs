@@ -15,12 +15,12 @@ public class Weapon : MonoBehaviour
     [SerializeField] protected Transform _defaultPosition = default;
     [SerializeField] protected Transform _aimPosition = default;
     
-    protected WeaponType _type = default;
+    protected WeaponType _weaponType = default;
     protected float _damage = default;
     
-    public void InitializeWeaponSettings()
+    public virtual void InitializeWeaponSettings()
     {
-        _type = _weaponData.Type;
+        _weaponType = _weaponData.Type;
         _damage = _weaponData.Damage;
     }
 
@@ -35,18 +35,16 @@ public class Weapon : MonoBehaviour
         if (!isAiming)
         {
             currentPosition = _defaultPosition;
+            
         }
         else
         {
             currentPosition = _aimPosition;
+            
         }
-
-        LeanTween.value(_anchor.gameObject, _anchor.transform.position,
-            currentPosition.position, .5f).setOnUpdate((Vector3 pos) =>
-        {
-            _anchor.transform.position = pos;
-        });
+        _anchor.transform.position = currentPosition.position;
+        
     }
     
-    public WeaponType Type => _type;
+    public WeaponType WeaponType => _weaponType;
 }

@@ -5,14 +5,9 @@ using UnityEngine;
 
 public class Sword : Weapon
 {
-    //[SerializeField] private 
-    private void Awake()
+    public override void InitializeWeaponSettings()
     {
-        InitializeSettings();
-    }
-
-    private void InitializeSettings()
-    {
-        InitializeWeaponSettings();
+        base.InitializeWeaponSettings();
+       // InitializeWeaponSettings();
     }
 }

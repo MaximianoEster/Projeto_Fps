@@ -25,4 +25,8 @@ public class HeadBobData : ScriptableObject
     public float RegularFrequencyMultiplier;
     public float MoveBackwardsFrequencyMultiplier;
     public float MoveSideFrequencyMultiplier;
+
+    [Space, Header("Camera Settings")] 
+    public Vector3 RegularCameraPosition;
+    public float RegularSpeed;
 }

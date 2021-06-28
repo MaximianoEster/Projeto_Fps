@@ -6,11 +6,13 @@ public class HeadBob : MonoBehaviour
 {
     [SerializeField] private HeadBobData _headBobData = default;
     [SerializeField] private Transform _virtualCameraOrientation = default;
+
+    private Vector3 _initialPos = default;
+    private float _regularSpeed = default;
     
     private float _xScroll = default;
     private float _yScroll = default;
     
-    private bool _resetted = false;
     private Vector3 _finalOffset = default;
     
     private float _moveBackwardsFrequencyMultiplier = default;
@@ -29,21 +31,6 @@ public class HeadBob : MonoBehaviour
     
     private AnimationCurve _xCurve = default;
     private AnimationCurve _yCurve = default;
-    
-    private void Awake()
-    {
-        InitializeSettings();
-    }
-    
-    private void Start()
-    {
-        GameManager.Instance.InputManager.OnAnyKeyPressed += HeadBobUpdate;
-    }
-
-    private void OnDisable()
-    {
-        GameManager.Instance.InputManager.OnAnyKeyPressed -= HeadBobUpdate;
-    }
     
     public void InitializeSettings()
     {
@@ -67,40 +54,31 @@ public class HeadBob : MonoBehaviour
         _xScroll = 0;
         _yScroll = 0;
         
-        _resetted = false;
         _finalOffset = Vector3.zero;
+
+        _regularSpeed = _headBobData.RegularSpeed;
+        _initialPos = _headBobData.RegularCameraPosition;
     }
 
-    private void HeadBobUpdate(InputsData inputsData)
+    public void MoveHeadBob(Vector2 movement)
     {
-        Vector2 currentDirection = inputsData.KeyboardDirection;
-        Vector3 currentMovement = new Vector3(currentDirection.x, 0f, currentDirection.y);
-        
-        if (currentMovement != Vector3.zero)
-        {
-            ScrollFpsHead(currentDirection);
+        ScrollFpsHead(movement);
             
-            _virtualCameraOrientation.localPosition = Vector3.Lerp(_virtualCameraOrientation.localPosition,
-                (Vector3.up * _virtualCameraOrientation.localPosition.y) + _finalOffset,
-                Time.deltaTime * 1.8f);
-        }
-        else
-        {
-            if (_resetted == false)
-            {
-                ResetFpsHead();
-            }
+        _virtualCameraOrientation.localPosition = Vector3.Lerp(_virtualCameraOrientation.localPosition,
+            (Vector3.up * _virtualCameraOrientation.localPosition.y) + _finalOffset,
+            Time.deltaTime * _regularSpeed);
+    }
 
-            _virtualCameraOrientation.localPosition = Vector3.Lerp(_virtualCameraOrientation.localPosition,
-                new Vector3(0f, _virtualCameraOrientation.localPosition.y, 0f), Time.deltaTime * 1.8f);
-        }
+    public void ResetHeadBob()
+    {
+        _virtualCameraOrientation.localPosition = Vector3.Lerp(_virtualCameraOrientation.localPosition,
+            _initialPos, Time.deltaTime * _regularSpeed);
     }
     
     private void ScrollFpsHead(Vector2 input)
     {
         Vector2 directions = input;
-        _resetted = false;
-
+        
         _xScroll += Time.deltaTime * _xFrequency * _runFrequencyMultiplier;
         _yScroll += Time.deltaTime * _yFrequency * _runFrequencyMultiplier;
 
@@ -115,15 +93,5 @@ public class HeadBob : MonoBehaviour
         
         _finalOffset.x = xValue * _xAmplitude * _runAmplitudeMultiplier * _additionalMultiplier;
         _finalOffset.y = yValue * _yAmplitude * _runAmplitudeMultiplier * _additionalMultiplier;
-    }
-
-    private void ResetFpsHead()
-    {
-        _resetted = true;
-
-        _xScroll = 0f;
-        _yScroll = 0f;
-        
-        _finalOffset = Vector3.zero;
     }
 }

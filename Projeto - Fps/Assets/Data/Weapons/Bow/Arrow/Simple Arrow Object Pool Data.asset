@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cffdb1dc59ccb3d47870837c3b8bf173, type: 3}
   m_Name: Simple Arrow Object Pool Data
   m_EditorClassIdentifier: 
-  ArrowPrefab: {fileID: 3346044355380623492, guid: b9ddf3c442d3e2c4eb844fbc9564c044,
+  ArrowPrefab: {fileID: 3771662162565970531, guid: 738b999db3381fc4f9599eaf6696257b,
     type: 3}
-  ArrowAmount: 10
+  ArrowAmount: 20

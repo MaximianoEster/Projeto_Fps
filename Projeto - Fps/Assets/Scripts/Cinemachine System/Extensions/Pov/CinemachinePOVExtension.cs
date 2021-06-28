@@ -1,4 +1,5 @@
 ﻿using Cinemachine;
+using UnityEditor;
 using UnityEngine;
 
 public class CinemachinePOVExtension : CinemachineExtension
@@ -19,8 +20,9 @@ public class CinemachinePOVExtension : CinemachineExtension
     
     protected override void Awake()
     {
-        base.Awake();
         InitializePovSettings();
+        base.Awake();
+        
     }
 
     private void Start()
@@ -39,6 +41,7 @@ public class CinemachinePOVExtension : CinemachineExtension
                 if (_startingRotation == null)
                 {
                     _startingRotation = transform.localRotation.eulerAngles;
+                    
                 }
                 
                 _startingRotation.x += _mouseDirection.x * _horizontalSpeed * Time.deltaTime;
@@ -52,6 +55,7 @@ public class CinemachinePOVExtension : CinemachineExtension
                     -_clampHorizontalAngleMin, _clampHorizontalAngleMax);
                 
                 
+
                 state.RawOrientation = Quaternion.Euler(-_startingRotation.y, 
                     _startingRotation.x, 0f);
             }
@@ -60,6 +64,8 @@ public class CinemachinePOVExtension : CinemachineExtension
 
     private void InitializePovSettings()
     {
+        _startingRotation = transform.localRotation.eulerAngles;
+        
         _clampVerticalAngleMax = rotationData.VerticalAngleMax;
         _clampVerticalAngleMin = rotationData.VerticalAngleMin;
         

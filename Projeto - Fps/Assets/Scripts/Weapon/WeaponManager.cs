@@ -54,9 +54,9 @@ public class WeaponManager : MonoBehaviour
     
     private void AddWeaponToDictionary(Weapon weaponData)
     {
-        if (!_weaponDicitionary.ContainsKey(weaponData.Type))
+        if (!_weaponDicitionary.ContainsKey(weaponData.WeaponType))
         {
-           _weaponDicitionary.Add(weaponData.Type, weaponData);
+           _weaponDicitionary.Add(weaponData.WeaponType, weaponData);
         }
         else
         {

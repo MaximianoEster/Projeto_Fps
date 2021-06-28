@@ -7,8 +7,9 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set;}
 
     [SerializeField] private InputManager _inputManager = default;
-    [SerializeField] private VfxManager vfxManager = default;
-
+    [SerializeField] private ObjectPoolManager _objectPoolManager = default;
+    public List<Transform> CheckPoints = new List<Transform>();
+    
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -29,9 +30,11 @@ public class GameManager : MonoBehaviour
     private void InitializeDefaultGameSettings()
     {
         Cursor.lockState = CursorLockMode.Confined;
+        _objectPoolManager.InitializeObjectPool();
+        
     }
 
-    public InputManager InputManager => _inputManager;
+    public ObjectPoolManager ObjectPoolManager => _objectPoolManager;
 
-    public VfxManager VfxManager => vfxManager;
+    public InputManager InputManager => _inputManager;
 }

@@ -7,6 +7,7 @@ TagManager:
   - Shootable
   - Ground
   - FxTemporaire
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -22,9 +23,9 @@ TagManager:
   - Artillery
   - Weapon
   - Vfx
-  - 
-  - 
-  - 
+  - Target
+  - Obstruction
+  - Player
   - 
   - 
   - 

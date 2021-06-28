@@ -599,7 +599,7 @@ public class CFXEasyEditor : EditorWindow
 		GUILayout.Space(8);
 		
 		//Resize window
-		if(foldoutChanged && Event.current.type == EventType.Repaint)
+		if(foldoutChanged && Event.current.type == UnityEngine.EventType.Repaint)
 		{
 			foldoutChanged = false;
 			
@@ -1568,7 +1568,7 @@ public class CFXEasyEditor : EditorWindow
 	{
 		Rect position = GUILayoutUtility.GetRect(0f, float.MaxValue, height, height, LineStyle);
 
-		if(Event.current.type == EventType.Repaint)
+		if(Event.current.type == UnityEngine.EventType.Repaint)
 		{
 			Color orgColor = GUI.color;
 			GUI.color = orgColor * color;

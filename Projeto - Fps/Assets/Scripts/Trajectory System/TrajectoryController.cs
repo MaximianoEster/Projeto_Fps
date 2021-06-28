@@ -10,21 +10,23 @@ public class TrajectoryController : MonoBehaviour
     [SerializeField] private int _linePoints = default;
     
     private bool _showLine = false;
-    private Vector3 _speedFinal = default;
+    private Vector3 _speed = default;
+    private Vector3 _finalSpeed = default;
+    private Vector3 _initialPos = default;
 
     public void CalculateTrajectory(Transform spawnPoint, Transform weaponRotation , float power)
     {
-        _speedFinal = new Vector3(weaponRotation.localRotation.y,-weaponRotation.localRotation.x,
-                          -weaponRotation.localRotation.x) * power;
+        _speed = new Vector3(weaponRotation.localRotation.y,-weaponRotation.localRotation.x,
+            -weaponRotation.localRotation.x) * power;
         
         if (_showLine)
         {
-            _lineRenderer.enabled = _showLine;
-           ShowTrajectory(spawnPoint.position, _speedFinal);
+            _lineRenderer.enabled = true;
+           ShowTrajectory(spawnPoint.position, _speed);
         }
         else
         {
-            _lineRenderer.enabled = _showLine;
+            _lineRenderer.enabled = false;
         }
     }
     
@@ -42,7 +44,7 @@ public class TrajectoryController : MonoBehaviour
         _lineRenderer.SetPositions(points);
     }
     
-    public Vector3 SpeedFinal => _speedFinal;
+    public Vector3 Speed => _speed;
 
     public bool ShowLine
     {

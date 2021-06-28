@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class Cannon : MonoBehaviour
 {
-    [SerializeField] private CannonballObjectPool cannonballObjectPool = default;
     [SerializeField] private Transform _spawnPoint = default;
 
     [SerializeField] private InteractiveItem _barrelInteractive = default;
@@ -13,14 +12,8 @@ public class Cannon : MonoBehaviour
     [SerializeField] private ExplosionController _explosionController = default;
     [SerializeField] private CameraShake _cameraShake = default;
 
-    private float _firePower =  default;
-    private Camera cam = default;
-
-    private void Awake()
-    {
-        InitializeSettings();
-    }
-
+    [SerializeField] private float _firePower = default;
+    
     private void Start()
     {
         GameManager.Instance.InputManager.OnAttackPerformed += FireCannon;
@@ -35,20 +28,14 @@ public class Cannon : MonoBehaviour
     {
         CalculateAndShowTrajectory();
     }
-
-    private void InitializeSettings()
-    {
-        cannonballObjectPool.InitializeCannonballPool();
-        _firePower = 200;
-    }
-
+    
     private void CalculateAndShowTrajectory()
     {
         if (_barrelInteractive.OnCannon)
         {
-            _trajectoryController.ShowLine = true;
             _trajectoryController.CalculateTrajectory(_spawnPoint,
                 _barrelInteractive.transform, _firePower);
+            _trajectoryController.ShowLine = true;
         }
 
         else
@@ -61,6 +48,7 @@ public class Cannon : MonoBehaviour
     {
         if (_barrelInteractive.OnCannon)
         {
+            /*
             Cannonball currentCannonball = cannonballObjectPool.GetCannonballFromPool();
             if (currentCannonball != null)
             {
@@ -76,9 +64,11 @@ public class Cannon : MonoBehaviour
                     Quaternion.identity;
 
                 currentCannonball.gameObject.SetActive(true);
-                Vector3 currentSpeed = _trajectoryController.SpeedFinal;
+                Vector3 currentSpeed = _trajectoryController.Speed;
                 currentCannonball.OnFire(currentSpeed);
+                
             }
+            */
         }
     }
 }

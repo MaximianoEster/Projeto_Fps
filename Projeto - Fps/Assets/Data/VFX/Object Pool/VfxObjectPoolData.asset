@@ -12,12 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b254b386cee9d744b8a72836e1298d57, type: 3}
   m_Name: VfxObjectPoolData
   m_EditorClassIdentifier: 
-  VfxAmount: 5
+  VfxAmount: 20
   VfxPrefabsList:
+  - {fileID: 5192232689896503521, guid: 5c753e0d12b9a3b40bd5cc63391f36be, type: 3}
   - {fileID: 6567154147343379144, guid: a1bbbec6795fdd84693f6bf7c50508e1, type: 3}
   - {fileID: 6932048928804496768, guid: 926904554edabfe4b880cc18ff366337, type: 3}
   - {fileID: 2191565233273636907, guid: bca570dcefdd86e4daa946094699a9da, type: 3}
   - {fileID: 6286097949123524801, guid: 8be6dd7d513b91c4784fcfbd591a590f, type: 3}
+  - {fileID: 6885476498954919623, guid: 104572afcee7e104485f346f8b91bf64, type: 3}
+  - {fileID: 4010686515978409748, guid: d4e44139fd9001e4da4fbc50089f68f9, type: 3}
   - {fileID: 8100475376050080885, guid: ffef7bab6205bc049885c0028264bd1b, type: 3}
   - {fileID: 8179657098780487106, guid: fa310fe4b2073a74481c69c8311acc5a, type: 3}
   - {fileID: 1416123742192793691, guid: 8f486ea85c5e6594fa87b4ccb6ef8617, type: 3}
+  - {fileID: 8164440433560396834, guid: 7fc342b00ef62f346aba4cfa43489001, type: 3}

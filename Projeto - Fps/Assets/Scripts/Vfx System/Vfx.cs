@@ -1,29 +1,25 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Vfx : MonoBehaviour
 {
-    public delegate void VfxHandler(Vfx vfxObj);
-    public event VfxHandler DisableVfx;
-    
     [SerializeField] private VfxData _vfxData = default;
-    private VfxType _vfxType = default;
-    private ParticleSystem.MainModule _mainModule = default;
     
-    public void InitializeSettings()
+    private ParticleSystem.MainModule _mainModule = default;
+    private ItemType _type = default;
+    private bool _isInitialized = false;
+    
+    public void InitializeVfxSettings()
     {
-        _vfxType = _vfxData.Type;
-        
+        _type = _vfxData.Type;
         _mainModule = GetComponent<ParticleSystem>().main;
         _mainModule.stopAction = ParticleSystemStopAction.Callback;
+        _isInitialized = true;
     }
 
     private void OnParticleSystemStopped()
     {
-        DisableVfx?.Invoke(this);
+       GameManager.Instance.ObjectPoolManager.ReturnToPool(_type, gameObject);
     }
-    
-    public VfxType Type => _vfxType;
+
+    public bool IsInitialized => _isInitialized;
 }

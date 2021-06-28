@@ -28,7 +28,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 69600600764111946}
-  - {fileID: 69600600879107388}
   m_Father: {fileID: 69600601157915474}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -125,7 +124,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 8a179da56848a4c49930447d819faba4, type: 3}
 --- !u!1 &69600600756839348
@@ -187,36 +186,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 69600600318156215}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &69600600879107389
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 69600600879107388}
-  m_Layer: 0
-  m_Name: ArrowGroup
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &69600600879107388
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 69600600879107389}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 69600600318156215}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &69600601157915475
 GameObject:
@@ -322,7 +291,6 @@ GameObject:
   m_Component:
   - component: {fileID: 69600601769279205}
   - component: {fileID: 69600601769279207}
-  - component: {fileID: 69600601769279204}
   m_Layer: 0
   m_Name: Simple_Bow
   m_TagString: Untagged
@@ -363,23 +331,7 @@ MonoBehaviour:
   _defaultPosition: {fileID: 69600601243452653}
   _aimPosition: {fileID: 69600600756839351}
   _bowData: {fileID: 11400000, guid: 77dd1a3985785eb4e95ac4b20c00116d, type: 2}
-  _arrowObjectPool: {fileID: 69600601769279204}
   _socket: {fileID: 69600600764111946}
---- !u!114 &69600601769279204
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 69600601769279194}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ccbdc1e5350dded40a83660ba45cc7e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _arrowObjectPoolData: {fileID: 11400000, guid: 4da3cbaeeebf2b74197f94ef1b3f96ed,
-    type: 2}
-  _arrowsGroup: {fileID: 69600600879107388}
 --- !u!1 &69600601828934260
 GameObject:
   m_ObjectHideFlags: 0
